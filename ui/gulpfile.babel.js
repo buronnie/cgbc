@@ -24,7 +24,7 @@ import remember     from 'gulp-remember';
 
 // Constants ----------------------------------------------------------
 const ENV  = gutil.env.env || 'development';
-const APPS = ['management'];
+const APPS = ['/'];
 const SYNC = browserSync.create();
 const PATH = {
   html:   [

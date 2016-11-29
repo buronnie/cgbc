@@ -1,6 +1,5 @@
 let routerApp = angular.module('app', [
-  'ui.router',
-  'app.finance'
+  'ui.router'
 ]);
 
 routerApp.config(($stateProvider, $urlRouterProvider) => {
@@ -14,9 +13,5 @@ routerApp.config(($stateProvider, $urlRouterProvider) => {
       .state('about', {
         url: '/about',
         templateUrl: 'about.html'
-      })
-      .state('base', {
-        abstract: true,
-        template: '<ui-view/>'
-      })
+      });
 });
