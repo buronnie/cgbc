@@ -47,10 +47,11 @@ const PATH = {
     './node_modules/angular-ui-grid/*{svg,woff,ttf}'
   ],
   less:  [
-    './src/common/app.less*'
+    './src/common/app.less'
   ],
   css: [
     './node_modules/bootstrap/dist/css/bootstrap.css',
+    './node_modules/bootstrap-slider/css/bootstrap-slider.css',
     './node_modules/angular-ui-grid/ui-grid.css'
   ],
   js: [

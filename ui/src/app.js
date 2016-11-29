@@ -1,4 +1,7 @@
-let routerApp = angular.module('app', ['ui.router']);
+let routerApp = angular.module('app', [
+  'ui.router',
+  'app.finance'
+]);
 
 routerApp.config(($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise('/home');
@@ -11,5 +14,9 @@ routerApp.config(($stateProvider, $urlRouterProvider) => {
       .state('about', {
         url: '/about',
         templateUrl: 'about.html'
-      });
+      })
+      .state('base', {
+        abstract: true,
+        template: '<ui-view/>'
+      })
 });
