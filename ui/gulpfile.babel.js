@@ -99,8 +99,7 @@ const PATH = {
 // Helpers ------------------------------------------------------------
 
 function performChain(name, src, dst, callback) {
-  let chain = gulp.src(src)
-      .pipe(cache(name));
+  let chain = gulp.src(src);
 
   if (callback) {
     chain = callback(chain);
