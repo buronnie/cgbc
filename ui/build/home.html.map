@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["home.html"],"sourcesContent":["<div class=\"jumbotron text-center\">\n    <h1>The Homey Page</h1>\n    <p>This page demonstrates <span class=\"text-danger\">nested</span> views.</p>\n</div>"],"file":"home.html"}
