@@ -93,7 +93,7 @@ const PATH = {
     './src/**',
   ],
   build: './build',
-  dist:  './dist',
+  dist:  '../public/',
 }
 
 // Helpers ------------------------------------------------------------
@@ -239,9 +239,9 @@ gulp.task('minify', function() {
     './build/**',
     '!./build/**/*.map',
   ])
-      .pipe(gulpif(/[.]js$/, ngAnnotate()))
-      .pipe(gulpif(/[.]js$/, uglify()))
-      .pipe(gulpif(/[.]css$/, csso()))
+      // .pipe(gulpif(/[.]js$/, ngAnnotate()))
+      // .pipe(gulpif(/[.]js$/, uglify()))
+      // .pipe(gulpif(/[.]css$/, csso()))
       .pipe(size())
       .pipe(gulp.dest(PATH.dist));
 });
@@ -252,9 +252,10 @@ gulp.task('clean', gulp.parallel('clean.build', 'clean.dist'));
 gulp.task('prebuild', gulp.parallel('build.html', 'build.less', 'build.css', 'copy.fonts', 'copy.assets', 'copy.js' , 'copy.vendor', 'copy.tmpl'));
 gulp.task('build', gulp.series('prebuild', 'concat.css'));
 gulp.task('rebuild', gulp.series('clean.build', 'build'));
-gulp.task('dist', gulp.series(gulp.parallel('rebuild', 'clean.dist'), 'minify'));
+gulp.task('dist', gulp.series('rebuild', 'minify'));
 gulp.task('watch', function() {
   return gulp.watch(PATH.watch, gulp.series('build'));
 });
 gulp.task('run', gulp.series('rebuild', gulp.parallel('serve', 'watch')));
 gulp.task('default', gulp.series('run'));
+gulp.task('deploy', gulp.series('dist'));

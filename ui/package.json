@@ -5,7 +5,8 @@
   "main": "gulpfile.babel.js",
   "scripts": {
     "test": "./node_modules/.bin/npm run gulp test",
-    "gulp": "./node_modules/.bin/gulp"
+    "gulp:watch": "./node_modules/.bin/gulp",
+    "gulp:deploy": "./node_modules/.bin/gulp deploy"
   },
   "dependencies": {
     "angular": "^1.5.0",
