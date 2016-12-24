@@ -1,14 +1,13 @@
 let routerApp = angular.module('app', [
   'ui.router',
-  'app.finance'
+  'app.finance',
+  'app.worship'
 ]);
 
-routerApp.config(($stateProvider, $urlRouterProvider) => {
-  $urlRouterProvider.otherwise('/finance');
-
+routerApp.config(($stateProvider) => {
   $stateProvider
-      .state('base', {
-        abstract: true,
-        template: '<ui-view/>'
-      });
+    .state('base', {
+      abstract: true,
+      template: '<ui-view/>'
+    });
 });

@@ -18,8 +18,6 @@ gem 'coffee-rails', '~> 4.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -30,7 +28,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "foreman"
+gem 'apipie-rails'
+
 group :production, :staging do
   gem "rails_12factor"
   gem "rails_stdout_logging"
@@ -39,9 +38,25 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
-  gem "rspec-rails", "~> 2.0"
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'rspec-rails'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'pry-remote'
+  gem 'rspec-instafail' # output failing specs immediately when running specs
+end
+
+group :test do
+  gem "json_spec"
+  gem 'factory_girl_rails'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-its'
+  gem 'shoulda-matchers', '~> 2.8'
+  gem 'sqlite3'
+  gem 'webmock'
+  gem 'rspec_junit_formatter', '0.2.2'
+  gem 'faker'
 end
 
 group :development do
