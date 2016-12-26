@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # -- API ---------------------------------------------
   namespace :api do
     namespace :v1 do
-      resource :donations
+      resources :donations
     end
   end
 

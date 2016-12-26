@@ -29,7 +29,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'apipie-rails'
-
+gem 'sqlite3'
+gem 'responders'
 group :production, :staging do
   gem "rails_12factor"
   gem "rails_stdout_logging"
@@ -53,7 +54,6 @@ group :test do
   gem 'rspec-collection_matchers'
   gem 'rspec-its'
   gem 'shoulda-matchers', '~> 2.8'
-  gem 'sqlite3'
   gem 'webmock'
   gem 'rspec_junit_formatter', '0.2.2'
   gem 'faker'
