@@ -63,7 +63,6 @@ const PATH = {
     './node_modules/angular/angular.js',
     './node_modules/angular-*/angular-*.js',
     './node_modules/angular-filter/dist/angular-filter.js',
-
     './node_modules/angular-ui-bootstrap/src/position/position.js',
     './node_modules/angular-ui-bootstrap/src/collapse/collapse.js',
     './node_modules/angular-ui-bootstrap/src/dropdown/dropdown.js',
@@ -74,6 +73,7 @@ const PATH = {
     './node_modules/angular-ui-bootstrap/src/typeahead/typeahead.js',
     './node_modules/angular-ui-bootstrap/src/popover/popover.js',
     './node_modules/angular-ui-bootstrap/src/tabs/tabs.js',
+    './node_modules/angular-ui-bootstrap/src/datepicker/datepicker.js',
 
     './node_modules/angular-ui-grid/ui-grid.js',
 
