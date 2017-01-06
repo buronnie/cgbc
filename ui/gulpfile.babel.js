@@ -30,15 +30,6 @@ const PATH = {
   html:   [
     './src/**/*.html',
   ],
-  tmpl: [
-    './node_modules/angular-ui-bootstrap/template*/pagination*/*.html',
-    './node_modules/angular-ui-bootstrap/template*/datepicker*/*.html',
-    './node_modules/angular-ui-bootstrap/template*/modal*/*.html',
-    './node_modules/angular-ui-bootstrap/template*/tooltip*/*.html',
-    './node_modules/angular-ui-bootstrap/template*/typeahead*/*.html',
-    './node_modules/angular-ui-bootstrap/template*/popover*/*.html',
-    './node_modules/angular-ui-bootstrap/template*/tabs*/*.html',
-  ],
   fonts:  [
     './node_modules/bootstrap/fonts/**/*',
     './node_modules/font-awesome/fonts/**/*',
@@ -59,26 +50,12 @@ const PATH = {
   ],
   vendor: [
     './node_modules/moment/moment.js',
-
     './node_modules/angular/angular.js',
+    './node_modules/angular-ui-router/release/angular-ui-router.js',
     './node_modules/angular-*/angular-*.js',
     './node_modules/angular-filter/dist/angular-filter.js',
-    './node_modules/angular-ui-bootstrap/src/position/position.js',
-    './node_modules/angular-ui-bootstrap/src/collapse/collapse.js',
-    './node_modules/angular-ui-bootstrap/src/dropdown/dropdown.js',
-    './node_modules/angular-ui-bootstrap/src/pagination/pagination.js',
-    './node_modules/angular-ui-bootstrap/src/tooltip/tooltip.js',
-    './node_modules/angular-ui-bootstrap/src/dateparser/dateparser.js',
-    './node_modules/angular-ui-bootstrap/src/modal/modal.js',
-    './node_modules/angular-ui-bootstrap/src/typeahead/typeahead.js',
-    './node_modules/angular-ui-bootstrap/src/popover/popover.js',
-    './node_modules/angular-ui-bootstrap/src/tabs/tabs.js',
-    './node_modules/angular-ui-bootstrap/src/datepicker/datepicker.js',
-
     './node_modules/angular-ui-grid/ui-grid.js',
-
-    './node_modules/angular-ui-bootstrap/dist/*.js',
-    './node_modules/angular-ui-router/release/angular-ui-router.js',
+    './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
     './node_modules/angular-breadcrumb/dist/angular-breadcrumb.js',
 
     './node_modules/angularjs-rails-resource/vendor/assets/javascripts/angularjs/rails/resource/*.js',
@@ -160,11 +137,6 @@ gulp.task('copy.vendor', function() {
   return performChain('vendor', PATH.vendor, PATH.build+"/assets", (chain) => {
     return chain.pipe(concat('vendor.js'));
   });
-});
-
-multiTask('copy.tmpl', function(app) {
-  let name = 'tmpl.'+app;
-  return performChain(name, PATH.tmpl, PATH.build+"/"+app);
 });
 
 // Build tasks --------------------------------------------------------
@@ -249,7 +221,7 @@ gulp.task('minify', function() {
 // Combos -------------------------------------------------------------
 
 gulp.task('clean', gulp.parallel('clean.build', 'clean.dist'));
-gulp.task('prebuild', gulp.parallel('build.html', 'build.less', 'build.css', 'copy.fonts', 'copy.assets', 'copy.js' , 'copy.vendor', 'copy.tmpl'));
+gulp.task('prebuild', gulp.parallel('build.html', 'build.less', 'build.css', 'copy.fonts', 'copy.assets', 'copy.js' , 'copy.vendor'));
 gulp.task('build', gulp.series('prebuild', 'concat.css'));
 gulp.task('rebuild', gulp.series('clean.build', 'build'));
 gulp.task('dist', gulp.series('rebuild', 'minify'));

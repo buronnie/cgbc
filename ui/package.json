@@ -9,10 +9,12 @@
     "gulp:deploy": "./node_modules/.bin/gulp deploy"
   },
   "dependencies": {
-    "angular": "^1.5.0",
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
     "angular-breadcrumb": "^0.5.0",
     "angular-filter": "^0.5.8",
     "angular-loading-bar": "^0.9.0",
+    "angular-sanitize": "^1.5.8",
     "angular-ui-bootstrap": "^2.3.0",
     "angular-ui-grid": "^3.2.9",
     "angular-ui-router": "^0.3.2",

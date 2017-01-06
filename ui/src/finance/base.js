@@ -1,4 +1,4 @@
-angular.module('app.finance', ['ui.router', 'ui.bootstrap']).config($stateProvider => {
+angular.module('app.finance', []).config($stateProvider => {
   $stateProvider
       .state('base.finance', {
         abstract: true,
@@ -15,5 +15,4 @@ angular.module('app.finance', ['ui.router', 'ui.bootstrap']).config($stateProvid
         templateUrl: 'finance/new.html',
         controller: 'Finance.NewCtrl'
       });
-  console.log(ui.router);
 });
