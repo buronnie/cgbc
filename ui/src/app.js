@@ -4,7 +4,8 @@ let routerApp = angular.module('app', [
   'app.worship',
   'ngAnimate',
   'ngSanitize',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'react'
 ]);
 
 routerApp.config(($stateProvider) => {
@@ -14,3 +15,17 @@ routerApp.config(($stateProvider) => {
       template: '<ui-view/>'
     });
 });
+
+let HelloComponent = React.createClass({
+  displayName: 'HelloComponent',
+  propTypes: {},
+  render: function render() {
+    return React.createElement(
+      'span',
+      null,
+      'Hello World!'
+    );
+  }
+});
+
+routerApp.value('HelloComponent', HelloComponent);

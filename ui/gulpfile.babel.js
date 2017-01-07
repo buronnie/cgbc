@@ -11,6 +11,7 @@ import size       from 'gulp-size';
 import csso       from 'gulp-csso';
 import filter     from 'gulp-filter';
 import concatCss  from 'gulp-concat-css';
+import babel      from 'gulp-babel';
 
 import fs  from 'fs';
 import del from 'del';
@@ -48,6 +49,9 @@ const PATH = {
   js: [
     './src/**/*.js',
   ],
+  jsx: [
+    './src/**/*.jsx',
+  ],
   vendor: [
     './node_modules/moment/moment.js',
     './node_modules/angular/angular.js',
@@ -62,6 +66,12 @@ const PATH = {
     './node_modules/angularjs-rails-resource/vendor/assets/javascripts/angularjs/rails/resource/utils/*.js',
     './node_modules/angular-loading-bar/build/loading-bar.js',
     './node_modules/bootstrap-slider/js/*.js',
+
+    // './node_modules/react/dist/react.js',
+    // './node_modules/react-dom/dist/react-dom.js',
+    './node_modules/inferno/dist/inferno.js',
+    './node_modules/inferno/dist/inferno-compat.js',
+    './node_modules/ngreact/ngReact.js',
 
     '!**/*.min.js',
     '!**/*_test.js',
@@ -128,9 +138,25 @@ gulp.task('copy.assets', function() {
 });
 
 gulp.task('copy.js', function() {
-  return performChain('js', PATH.js, PATH.build+"/", (chain) => {
-    return chain.pipe(concat('app.js'));
-  });
+  return gulp.src(PATH.js)
+      .pipe(babel(
+        {
+          "presets": ["es2015", "stage-1"],
+          "plugins": [
+              ["module-resolver", {
+                  // "root": ["."],
+                  "alias": {
+                      "react": "inferno-compat",
+                      "react-dom": "inferno-compat"
+                  }
+              }],
+              "transform-react-jsx",
+              'transform-runtime'
+          ]
+        }
+      ))
+      .pipe(concat('app.js'))
+      .pipe(gulp.dest(PATH.build));
 });
 
 gulp.task('copy.vendor', function() {
@@ -217,6 +243,8 @@ gulp.task('minify', function() {
       .pipe(size())
       .pipe(gulp.dest(PATH.dist));
 });
+
+
 
 // Combos -------------------------------------------------------------
 

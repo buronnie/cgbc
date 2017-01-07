@@ -1,3 +1,13 @@
 {
-  "presets": ["es2015"]
+  "presets": ["es2015", "stage-1"],
+  "plugins": [
+      ["module-resolver", {
+          "root": ["."],
+          "alias": {
+              "react": "inferno-compat",
+              "react-dom": "inferno-compat"
+          }
+      }],
+      "transform-react-jsx"
+  ]
 }
