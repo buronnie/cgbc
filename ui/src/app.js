@@ -16,16 +16,4 @@ routerApp.config(($stateProvider) => {
     });
 });
 
-let HelloComponent = React.createClass({
-  displayName: 'HelloComponent',
-  propTypes: {},
-  render: function render() {
-    return React.createElement(
-      'span',
-      null,
-      'Hello World!'
-    );
-  }
-});
-
-routerApp.value('HelloComponent', HelloComponent);
+routerApp.value('Photo', Photo);
