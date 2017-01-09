@@ -21,7 +21,10 @@ import sourcemaps   from 'gulp-sourcemaps';
 import ngAnnotate   from 'gulp-ng-annotate';
 import autoprefixer from 'gulp-autoprefixer';
 import remember     from 'gulp-remember';
+import rename       from "gulp-rename";
+
 const babel = require('gulp-babel');
+const webpack = require('gulp-webpack');
 
 // Constants ----------------------------------------------------------
 const ENV  = gutil.env.env || 'development';
@@ -48,6 +51,7 @@ const PATH = {
   ],
   js: [
     './src/**/*.js',
+    '!./src/entry.js'
   ],
   vendor: [
     './node_modules/moment/moment.js',
@@ -64,9 +68,9 @@ const PATH = {
     './node_modules/angular-loading-bar/build/loading-bar.js',
     './node_modules/bootstrap-slider/js/*.js',
 
-    './node_modules/react/dist/react.js',
-    './node_modules/react-dom/dist/react-dom.js',
-    './node_modules/ngreact/ngReact.js',
+    // './node_modules/react/dist/react.js',
+    // './node_modules/react-dom/dist/react-dom.js',
+    // './node_modules/ngreact/ngReact.js',
 
     '!**/*.min.js',
     '!**/*_test.js',
@@ -141,18 +145,16 @@ gulp.task('copy.js', function() {
 gulp.task('babel.js', function() {
   let chain = gulp.src(PATH.build + "/app.js");
   chain.pipe(babel({
-    "presets": ["es2015", "stage-1", "react"],
-    "plugins": [
-      ["module-resolver", {
-        "root": ["."],
-        "alias": {
-          "react": "inferno-compat",
-          "react-dom": "inferno-compat"
-        }
-      }]
-    ]
+    "presets": ["es2015", "stage-1", "react"]
   }));
   return chain.pipe(gulp.dest(PATH.build));
+});
+
+gulp.task('webpack', function() {
+  return gulp.src('./src/entry.js')
+    .pipe(webpack(require('./webpack.config.js')))
+    .pipe(rename("entry.js"))
+    .pipe(gulp.dest('build/assets'));
 });
 
 gulp.task('copy.vendor', function() {
@@ -244,7 +246,7 @@ gulp.task('minify', function() {
 
 gulp.task('clean', gulp.parallel('clean.build', 'clean.dist'));
 gulp.task('prebuild', gulp.parallel('build.html', 'build.less', 'build.css', 'copy.fonts', 'copy.assets', 'copy.js' , 'copy.vendor'));
-gulp.task('build', gulp.series('prebuild', 'concat.css', 'babel.js'));
+gulp.task('build', gulp.series('prebuild', 'concat.css', 'webpack', 'babel.js'));
 gulp.task('rebuild', gulp.series('clean.build', 'build'));
 gulp.task('dist', gulp.series('rebuild', 'minify'));
 gulp.task('watch', function() {
