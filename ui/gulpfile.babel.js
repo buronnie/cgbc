@@ -69,8 +69,6 @@ const PATH = {
     './node_modules/angular-loading-bar/build/loading-bar.js',
     './node_modules/bootstrap-slider/js/*.js',
 
-    // './node_modules/ngreact/ngReact.js',
-
     '!**/*.min.js',
     '!**/*_test.js',
   ],
@@ -140,14 +138,6 @@ gulp.task('copy.js', function() {
     return chain.pipe(concat('app.js'));
   });
 });
-
-// gulp.task('babel.js', function() {
-//   let chain = gulp.src(PATH.build + "/app.js");
-//   chain.pipe(babel({
-//     "presets": ["es2015", "stage-1", "react"]
-//   }));
-//   return chain.pipe(gulp.dest(PATH.build));
-// });
 
 gulp.task('webpack', function() {
   return gulp.src('./src/entry.js')

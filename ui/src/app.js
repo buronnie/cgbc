@@ -16,4 +16,4 @@ routerApp.config(($stateProvider) => {
     });
 });
 
-routerApp.value('Photo', Photo);
+routerApp.value('Photo', ns.Photo);
