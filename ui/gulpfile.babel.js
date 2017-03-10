@@ -21,6 +21,10 @@ import sourcemaps   from 'gulp-sourcemaps';
 import ngAnnotate   from 'gulp-ng-annotate';
 import autoprefixer from 'gulp-autoprefixer';
 import remember     from 'gulp-remember';
+import rename       from "gulp-rename";
+
+const babel = require('gulp-babel');
+const webpack = require('gulp-webpack');
 
 // Constants ----------------------------------------------------------
 const ENV  = gutil.env.env || 'development';
@@ -47,6 +51,8 @@ const PATH = {
   ],
   js: [
     './src/**/*.js',
+    '!./src/entry.js',
+    '!./src/**/*.jsx'
   ],
   vendor: [
     './node_modules/moment/moment.js',
@@ -131,6 +137,13 @@ gulp.task('copy.js', function() {
   return performChain('js', PATH.js, PATH.build+"/", (chain) => {
     return chain.pipe(concat('app.js'));
   });
+});
+
+gulp.task('webpack', function() {
+  return gulp.src('./src/entry.js')
+    .pipe(webpack(require('./webpack.config.js')))
+    .pipe(rename("entry.js"))
+    .pipe(gulp.dest('build/assets'));
 });
 
 gulp.task('copy.vendor', function() {
@@ -222,7 +235,7 @@ gulp.task('minify', function() {
 
 gulp.task('clean', gulp.parallel('clean.build', 'clean.dist'));
 gulp.task('prebuild', gulp.parallel('build.html', 'build.less', 'build.css', 'copy.fonts', 'copy.assets', 'copy.js' , 'copy.vendor'));
-gulp.task('build', gulp.series('prebuild', 'concat.css'));
+gulp.task('build', gulp.series('prebuild', 'concat.css', 'webpack'));
 gulp.task('rebuild', gulp.series('clean.build', 'build'));
 gulp.task('dist', gulp.series('rebuild', 'minify'));
 gulp.task('watch', function() {

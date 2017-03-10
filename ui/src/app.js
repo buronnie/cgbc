@@ -4,7 +4,8 @@ let routerApp = angular.module('app', [
   'app.worship',
   'ngAnimate',
   'ngSanitize',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'react'
 ]);
 
 routerApp.config(($stateProvider) => {
@@ -14,3 +15,5 @@ routerApp.config(($stateProvider) => {
       template: '<ui-view/>'
     });
 });
+
+routerApp.value('Photo', ns.Photo);

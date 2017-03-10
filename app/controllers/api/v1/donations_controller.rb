@@ -68,7 +68,6 @@ class Api::V1::DonationsController < Api::V1::BaseController
   error code: 422
 
   def update
-    binding.pry
     resource.update_attributes permitted_params
     respond_with resource, status: 200
   end
